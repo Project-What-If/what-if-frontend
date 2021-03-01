@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function RoomForm(props) {
     const [inputs, setInputs] = useState({
