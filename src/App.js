@@ -1,12 +1,7 @@
 import React from 'react';
-import Data from './Data';
 
 function App() {
-    return (
-        <div>
-            <Data />
-        </div>
-    );
+    return <div>hello</div>;
 }
 
 export default App;
