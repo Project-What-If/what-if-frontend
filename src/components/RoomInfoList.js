@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RoomInfo from './RoomInfo';
 
 function RoomInfoList(props) {
