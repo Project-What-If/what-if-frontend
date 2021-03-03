@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import RoomForm from './components/RoomForm';
+import RoomInfoList from './components/RoomInfoList';
 
 function App() {
     const nextId = useRef(2);
@@ -20,7 +21,7 @@ function App() {
     return (
         <div>
             <RoomForm onCreate={handleCreate} />
-            {JSON.stringify(rooms)}
+            <RoomInfoList data={rooms} />
         </div>
     );
 }
