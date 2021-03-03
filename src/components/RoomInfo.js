@@ -5,6 +5,10 @@ function RoomInfo(props) {
     const style = {
         'max-width': '540px',
     };
+    const handleRemove = () => {
+        const { room, onRemove } = props;
+        onRemove(room.id);
+    };
     const { title, content, image, imageURL, tag, id } = props.room;
     return (
         <div className="card mb-3" style={{ style }}>
@@ -24,10 +28,10 @@ function RoomInfo(props) {
                 </div>
                 {/* <button onClick={this.handleToggleEdit} className="btn btn-warning">
                     수정
-                </button>
-                <button onClick={this.handleRemove} className="btn btn-danger">
-                    삭제
                 </button> */}
+                <button onClick={handleRemove} className="btn btn-danger">
+                    삭제
+                </button>
             </div>
         </div>
     );

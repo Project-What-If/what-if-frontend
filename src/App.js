@@ -18,10 +18,13 @@ function App() {
         setRooms(rooms.concat({ id: nextId.current, ...data }));
         nextId.current += 1;
     };
+    const handleRemove = id => {
+        setRooms(rooms.filter(room => room.id !== id));
+    };
     return (
         <div>
             <RoomForm onCreate={handleCreate} />
-            <RoomInfoList data={rooms} />
+            <RoomInfoList data={rooms} onRemove={handleRemove} />
         </div>
     );
 }
