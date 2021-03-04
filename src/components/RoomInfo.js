@@ -3,17 +3,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 function RoomInfo(props) {
     const style = {
-        'max-width': '540px',
+        maxWidth: '540px',
     };
 
-    const [modify, setmodify] = useState({
+    const [modify, setModify] = useState({
         // 우리는 수정 버튼을 눌렀을 떄 editing 값을 true 로 설정해줄것입니다.
         // 이 값이 true 일 때에는, 기존에 텍스트 형태로 보여주던 값들을
         // input 형태로 보여주게 됩니다.
         editing: false,
         // input 의 값은 유동적이겠지요? input 값을 담기 위해서 각 필드를 위한 값도
         // 설정합니다
-        title: '',
+        title: '제목입니다.',
         content: '',
         image: '',
         imageURL: '',
@@ -27,12 +27,12 @@ function RoomInfo(props) {
 
     const handleToggleEdit = () => {
         const { editing } = modify;
-        setmodify({ editing: !editing });
+        setModify({ ...modify, editing: !editing });
     };
 
     const handleChange = e => {
         const { value, name } = e.target;
-        setmodify({
+        setModify({
             ...modify,
             [name]: value,
         });
@@ -40,18 +40,23 @@ function RoomInfo(props) {
 
     // useEffect(() => {
     //     const { room, onUpdate } = props;
-    //     setmodify({
-    //         title: room.title,
-    //         content: room.content,
-    //         image: room.image,
-    //         imageURL: room.imageURL,
-    //         tag: room.tag,
-    //     });
+    //     if (modify.editing === true) {
+    //         setModify({
+    //             title: room.title,
+    //             content: room.content,
+    //             image: room.image,
+    //             imageURL: room.imageURL,
+    //             tag: room.tag,
+    //         });
+    //     } else {
+    //         console.log('false일때입니다.');
+    //     }
+    //     console.log(modify.editing);
     // }, [modify.editing]);
 
     const { editing } = modify;
     if (editing) {
-        // 수정모드
+        console.log('title은', modify.title);
         return (
             <div style={style}>
                 <div>
@@ -103,16 +108,16 @@ function RoomInfo(props) {
         </div>
     );
 }
-RoomInfo.defaultProps = {
-    room: {
-        // undefined 방지
-        title: '',
-        content: '',
-        image: '',
-        imageURL: '',
-        tag: '',
-        id: 0,
-    },
-};
+// RoomInfo.defaultProps = {
+//     room: {
+//         // undefined 방지
+//         title: '',
+//         content: '',
+//         image: '',
+//         imageURL: '',
+//         tag: '',
+//         id: 0,
+//     },
+// };
 
 export default RoomInfo;

@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
 import RoomForm from './components/RoomForm';
 import RoomInfoList from './components/RoomInfoList';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
     const nextId = useRef(2);
+    const [check, onCheck] = useState(false);
     const [rooms, setRooms] = useState([
         {
             id: 1,
@@ -23,7 +25,8 @@ function App() {
     };
     return (
         <div>
-            <RoomForm onCreate={handleCreate} />
+            <button onClick={() => onCheck(!check)}>클릭</button>
+            {check && <RoomForm onCreate={handleCreate} />}
             <RoomInfoList data={rooms} onRemove={handleRemove} />
         </div>
     );
