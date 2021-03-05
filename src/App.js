@@ -11,7 +11,7 @@ function App() {
             id: 1,
             title: '제목입니다',
             content: '본문입니다.',
-            image: '사진입니다.',
+            image: '',
             imageURL: '',
             tag: 'tag1, tag2',
         },

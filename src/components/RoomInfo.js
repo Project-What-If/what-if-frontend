@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function RoomInfo(props) {
@@ -17,7 +17,7 @@ function RoomInfo(props) {
         imageURL: '',
         tag: '',
     });
-    const imageInput = React.createRef();
+    const imageInput = useRef();
 
     const handleRemove = () => {
         const { room, onRemove } = props;
@@ -120,7 +120,7 @@ function RoomInfo(props) {
         );
     }
 
-    const { title, content, image, imageURL, tag, id } = props.room;
+    const { title, content, image, imageURL, tag } = props.room;
     return (
         <div className="card mb-3" style={{ style }}>
             <div className="row no-gutters">

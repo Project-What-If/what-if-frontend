@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function RoomForm(props) {
@@ -9,7 +9,7 @@ function RoomForm(props) {
         imageURL: '',
         tag: '',
     });
-    const imageInput = React.createRef();
+    const imageInput = useRef();
 
     const { title, content, image, imageURL, tag } = inputs;
 
@@ -62,7 +62,7 @@ function RoomForm(props) {
                 <textarea placeholder="본문" class="form-control" id="exampleFormControlTextarea1" rows="3" value={content} onChange={handleChange} name="content"></textarea>
             </div>
             <div className="form-group">
-                <input accept="image/jpg,image/png,image/jpeg,image/gif" type="file" class="form-control-file" id="exampleFormControlFile1" onChange={fileHandler} name="image" ref={image} />
+                <input accept="image/jpg,image/png,image/jpeg,image/gif" type="file" class="form-control-file" id="exampleFormControlFile1" onChange={fileHandler} name="image" ref={imageInput} />
                 {profilePreview}
             </div>
             <div className="form-group">
