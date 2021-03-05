@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function RoomForm(props) {
     const [inputs, setInputs] = useState({
@@ -8,6 +9,7 @@ function RoomForm(props) {
         imageURL: '',
         tag: '',
     });
+    const imageInput = useRef();
 
     const { title, content, image, imageURL, tag } = inputs;
 
@@ -29,7 +31,27 @@ function RoomForm(props) {
             imageURL: '',
             tag: '',
         });
+        imageInput.current.value = '';
     };
+
+    const fileHandler = e => {
+        e.preventDefault();
+        const reader = new FileReader();
+        const file = e.target.files[0];
+        reader.onloadend = () => {
+            setInputs({
+                ...inputs,
+                image: file,
+                imageURL: reader.result,
+            });
+        };
+        if (file) reader.readAsDataURL(file);
+    };
+
+    let profilePreview = null;
+    if (image !== '') {
+        profilePreview = <img className="image_preview" src={imageURL} width="250" height="250"></img>;
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -39,18 +61,10 @@ function RoomForm(props) {
             <div className="form-group">
                 <textarea placeholder="본문" class="form-control" id="exampleFormControlTextarea1" rows="3" value={content} onChange={handleChange} name="content"></textarea>
             </div>
-            {/* <div className="form-group">
-                <input
-                    accept="image/jpg,image/png,image/jpeg,image/gif"
-                    type="file"
-                    class="form-control-file"
-                    id="exampleFormControlFile1"
-                    onChange={this.fileHandler}
-                    name="image"
-                    ref={this.imageInput}
-                />
-                {profile_preview}
-            </div> */}
+            <div className="form-group">
+                <input accept="image/jpg,image/png,image/jpeg,image/gif" type="file" class="form-control-file" id="exampleFormControlFile1" onChange={fileHandler} name="image" ref={imageInput} />
+                {profilePreview}
+            </div>
             <div className="form-group">
                 <textarea placeholder="태그" class="form-control" id="exampleFormControlTextarea1" rows="3" value={tag} onChange={handleChange} name="tag"></textarea>
             </div>

@@ -1,7 +1,39 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import RoomForm from './components/RoomForm';
+import RoomInfoList from './components/RoomInfoList';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
-    return <div>hello</div>;
+    const nextId = useRef(2);
+    const [check, onCheck] = useState(false);
+    const [rooms, setRooms] = useState([
+        {
+            id: 1,
+            title: '제목입니다',
+            content: '본문입니다.',
+            image: '',
+            imageURL: '',
+            tag: 'tag1, tag2',
+        },
+    ]);
+    const handleCreate = data => {
+        setRooms(rooms.concat({ id: nextId.current, ...data }));
+        nextId.current += 1;
+    };
+    const handleRemove = id => {
+        setRooms(rooms.filter(room => room.id !== id));
+    };
+
+    const handleUpdate = (id, data) => {
+        setRooms(rooms.map(room => (room.id === id ? { ...room, ...data } : room)));
+    };
+    return (
+        <div>
+            <button onClick={() => onCheck(!check)}>클릭</button>
+            {check && <RoomForm onCreate={handleCreate} />}
+            <RoomInfoList data={rooms} onRemove={handleRemove} onUpdate={handleUpdate} />
+        </div>
+    );
 }
 
 export default App;
