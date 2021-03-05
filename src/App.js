@@ -23,11 +23,15 @@ function App() {
     const handleRemove = id => {
         setRooms(rooms.filter(room => room.id !== id));
     };
+
+    const handleUpdate = (id, data) => {
+        setRooms(rooms.map(room => (room.id === id ? { ...room, ...data } : room)));
+    };
     return (
         <div>
             <button onClick={() => onCheck(!check)}>클릭</button>
             {check && <RoomForm onCreate={handleCreate} />}
-            <RoomInfoList data={rooms} onRemove={handleRemove} />
+            <RoomInfoList data={rooms} onRemove={handleRemove} onUpdate={handleUpdate} />
         </div>
     );
 }

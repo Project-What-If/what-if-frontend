@@ -7,18 +7,17 @@ function RoomInfo(props) {
     };
 
     const [modify, setModify] = useState({
-        // 우리는 수정 버튼을 눌렀을 떄 editing 값을 true 로 설정해줄것입니다.
-        // 이 값이 true 일 때에는, 기존에 텍스트 형태로 보여주던 값들을
-        // input 형태로 보여주게 됩니다.
+        // 우리는 수정 버튼을 눌렀을 떄 editing 값을 true 로 설정
+        // 이 값이 true 일 때에는, 기존에 텍스트 형태로 보여주던 값들을 input 형태로 보여주게 함
         editing: false,
-        // input 의 값은 유동적이겠지요? input 값을 담기 위해서 각 필드를 위한 값도
-        // 설정합니다
-        title: '제목입니다.',
+        // input 의 값은 유동적. input 값을 담기 위해서 각 필드를 위한 값도 설정
+        title: '',
         content: '',
         image: '',
         imageURL: '',
         tag: '',
     });
+    const imageInput = React.createRef();
 
     const handleRemove = () => {
         const { room, onRemove } = props;
@@ -26,8 +25,31 @@ function RoomInfo(props) {
     };
 
     const handleToggleEdit = () => {
+        const { room, onUpdate } = props;
         const { editing } = modify;
-        setModify({ ...modify, editing: !editing });
+        if (!editing) {
+            setModify({
+                editing: true,
+                title: room.title,
+                content: room.content,
+                image: room.image,
+                imageURL: room.imageURL,
+                tag: room.tag,
+            });
+        } else {
+            onUpdate(room.id, {
+                title: modify.title,
+                content: modify.content,
+                image: modify.image,
+                imageURL: modify.imageURL,
+                tag: modify.tag,
+            });
+            setModify({
+                ...modify,
+                editing: false,
+            });
+        }
+        // setModify({ ...modify, editing: !editing });
     };
 
     const handleChange = e => {
@@ -38,25 +60,41 @@ function RoomInfo(props) {
         });
     };
 
-    // useEffect(() => {
-    //     const { room, onUpdate } = props;
-    //     if (modify.editing === true) {
-    //         setModify({
-    //             title: room.title,
-    //             content: room.content,
-    //             image: room.image,
-    //             imageURL: room.imageURL,
-    //             tag: room.tag,
-    //         });
-    //     } else {
-    //         console.log('false일때입니다.');
-    //     }
-    //     console.log(modify.editing);
-    // }, [modify.editing]);
+    const fileHandler = e => {
+        e.preventDefault();
+        const reader = new FileReader();
+        const file = e.target.files[0];
+        reader.onloadend = () => {
+            setModify({
+                ...modify,
+                image: file,
+                imageURL: reader.result,
+            });
+        };
+        if (file) reader.readAsDataURL(file);
+    };
+
+    let profilePreview = null;
+    if (modify.image !== '') {
+        profilePreview = <img className="image_preview" src={modify.imageURL} width="250" height="250"></img>;
+    }
 
     const { editing } = modify;
+
+    // useEffect(() => {
+    //     const { room, onUpdate } = props;
+    //     setModify({
+    //         title: room.title,
+    //         content: room.content,
+    //         image: room.image,
+    //         imageURL: room.imageURL,
+    //         tag: room.tag,
+    //     });
+    //     console.log(room.title);
+    //     console.log(room.content);
+    // }, [editing]);
+
     if (editing) {
-        console.log('title은', modify.title);
         return (
             <div style={style}>
                 <div>
@@ -65,9 +103,10 @@ function RoomInfo(props) {
                 <div>
                     <input value={modify.content} name="content" placeholder="내용" onChange={handleChange} />
                 </div>
-                {/* <div>
+                <div>
                     <input accept="image/jpg,image/png,image/jpeg,image/gif" type="file" name="image" placeholder="이미지" onChange={fileHandler} ref={imageInput} />
-                </div> */}
+                    {profilePreview}
+                </div>
                 <div>
                     <input value={modify.tag} name="tag" placeholder="태그" onChange={handleChange} />
                 </div>
@@ -108,16 +147,16 @@ function RoomInfo(props) {
         </div>
     );
 }
-// RoomInfo.defaultProps = {
-//     room: {
-//         // undefined 방지
-//         title: '',
-//         content: '',
-//         image: '',
-//         imageURL: '',
-//         tag: '',
-//         id: 0,
-//     },
-// };
+RoomInfo.defaultProps = {
+    room: {
+        // undefined 방지
+        title: '',
+        content: '',
+        image: '',
+        imageURL: '',
+        tag: '',
+        id: 0,
+    },
+};
 
 export default RoomInfo;

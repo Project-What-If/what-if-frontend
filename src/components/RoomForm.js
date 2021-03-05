@@ -40,6 +40,7 @@ function RoomForm(props) {
         const file = e.target.files[0];
         reader.onloadend = () => {
             setInputs({
+                ...inputs,
                 image: file,
                 imageURL: reader.result,
             });
@@ -61,7 +62,7 @@ function RoomForm(props) {
                 <textarea placeholder="본문" class="form-control" id="exampleFormControlTextarea1" rows="3" value={content} onChange={handleChange} name="content"></textarea>
             </div>
             <div className="form-group">
-                <input accept="image/jpg,image/png,image/jpeg,image/gif" type="file" class="form-control-file" id="exampleFormControlFile1" onChange={fileHandler} name="image" ref={imageInput} />
+                <input accept="image/jpg,image/png,image/jpeg,image/gif" type="file" class="form-control-file" id="exampleFormControlFile1" onChange={fileHandler} name="image" ref={image} />
                 {profilePreview}
             </div>
             <div className="form-group">

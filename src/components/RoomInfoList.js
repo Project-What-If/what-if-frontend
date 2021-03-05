@@ -10,5 +10,6 @@ function RoomInfoList(props) {
 RoomInfoList.defaultProps = {
     data: [],
     onRemove: () => console.warn('onRemove not defined'),
+    onUpdate: () => console.warn('onUpdate not defined'),
 };
 export default RoomInfoList;
