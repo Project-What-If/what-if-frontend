@@ -1,11 +1,17 @@
 import { Tag } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
 function RoomRegister() {
     const dispatch = useDispatch();
+
+    const { views, date, editDate } = useSelector(state => ({
+        views: state.roomReducers.views,
+        date: state.roomReducers.date,
+        editDate: '',
+    }));
 
     const [TitleValue, setTitleValue] = useState('');
     const [TagValue, setTagValue] = useState('');
@@ -19,17 +25,17 @@ function RoomRegister() {
     const onTitleChange = event => {
         setTitleValue(event.currentTarget.value);
     };
-    console.log(TitleValue);
+    // console.log(TitleValue);
 
     const onTagChange = event => {
         setTagValue(event.currentTarget.value);
     };
-    console.log(TagValue);
+    // console.log(TagValue);
 
     const onContentChange = event => {
         setContentValue(event.currentTarget.value);
     };
-    console.log(ContentValue);
+    // console.log(ContentValue);
 
     const onImageChange = event => {
         event.preventDefault();
@@ -49,13 +55,40 @@ function RoomRegister() {
 
     const onSubmitRoom = event => {
         event.preventDefault();
-        const room = { title: TitleValue, tag: TagValue, content: ContentValue, image: ImageValue, imageURL: ImageURLValue };
+        if (TitleValue === '' || TitleValue === null || TitleValue === undefined) {
+            alert('제목을 작성하십시오.');
+            return false;
+        }
+        if (TagValue === '' || TagValue === null || TagValue === undefined) {
+            alert('태그를 작성하십시오.');
+            return false;
+        }
+        if (ContentValue === '' || ContentValue === null || ContentValue === undefined) {
+            alert('내용을 작성하십시오.');
+            return false;
+        }
+        if (ImageValue === '' || ImageValue === null || ImageValue === undefined) {
+            alert('이미지를 넣으십시오.');
+            return false;
+        }
+
+        const room = {
+            title: TitleValue,
+            tag: TagValue,
+            content: ContentValue,
+            image: ImageValue,
+            imageURL: ImageURLValue,
+            views,
+            date,
+            editDate,
+        };
         dispatch(roomActions.registerRoom(room));
         setTitleValue('');
         setTagValue('');
         setContentValue('');
         setImageValue(null);
         setImageURLValue('');
+        return true;
         // ImageRef.current.value = '';
     };
 

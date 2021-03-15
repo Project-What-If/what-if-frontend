@@ -3,8 +3,8 @@ import { takeLatest } from 'redux-saga/effects';
 import { roomActions } from '../slice/roomSlice';
 import { registerRoomAsync } from './roomSaga';
 
-const { registerArticle } = roomActions;
+const { registerRoom } = roomActions;
 
 export default function* rootWatcher() {
-    yield takeLatest(registerArticle.type, registerRoomAsync);
+    yield takeLatest(registerRoom.type, registerRoomAsync);
 }
