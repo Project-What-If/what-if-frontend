@@ -1,8 +1,12 @@
 import { Tag } from 'antd';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
 function RoomRegister() {
+    const dispatch = useDispatch();
+
     const [TitleValue, setTitleValue] = useState('');
     const [TagValue, setTagValue] = useState('');
     const [ContentValue, setContentValue] = useState('');
@@ -32,7 +36,7 @@ function RoomRegister() {
     const onSubmitRoom = event => {
         event.preventDefault();
         const room = { title: TitleValue, tag: TagValue, content: ContentValue, image: ImageValue };
-        console.log(room);
+        dispatch(roomActions.registerRoom(room));
     };
 
     return (

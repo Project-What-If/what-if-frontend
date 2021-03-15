@@ -3,7 +3,7 @@ import React from 'react';
 function RoomRegisterOrEdit(props) {
     return (
         <div>
-            <form onSubmit>
+            <form onSubmit={props.handleSubmit}>
                 <br />
                 <input onChange={props.handleTitleChange} value={props.titleValue} type="text" name="title" placeholder=":제목을 입력하세요" />
                 <hr></hr>
