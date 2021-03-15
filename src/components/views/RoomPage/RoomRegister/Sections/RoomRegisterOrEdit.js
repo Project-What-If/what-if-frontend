@@ -4,6 +4,11 @@ import { Button, Input } from 'antd';
 const { TextArea } = Input;
 
 function RoomRegisterOrEdit(props) {
+    // let profilePreview = null;
+    // if (props.imageValue !== null) {
+    //     profilePreview = <img className="image_preview" src={props.imageURLValue} width="250" height="250"></img>;
+    // }
+
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <form onSubmit={props.handleSubmit}>
@@ -17,6 +22,7 @@ function RoomRegisterOrEdit(props) {
                         <TextArea onChange={props.handleContentChange} value={props.contentValue} name="content" />
                     </div>
                     <Input onChange={props.handleImageChange} accept="image/jpg,image/png,image/jpeg,image/gif" type="file" name="image" />
+                    {props.imagePreview}
                 </div>
                 <Button type="danger" onClick={props.handleSubmit}>
                     {props.updateRequest ? '수정' : '등록'}
