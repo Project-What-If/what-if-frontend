@@ -83,6 +83,8 @@ function RoomRegister() {
             editDate,
         };
         dispatch(roomActions.registerRoom(room));
+
+        // 초기화
         setTitleValue('');
         setTagValue('');
         setContentValue('');
