@@ -13,6 +13,15 @@
         "no-unused-vars": "warn",
         "no-console": "off",
         "no-debugger": "off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "object-shorthand": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"],
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
     }
 }

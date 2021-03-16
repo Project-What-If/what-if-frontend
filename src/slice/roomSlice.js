@@ -2,7 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const roomSlice = createSlice({
     name: 'room',
-    initialState: { id: 0, title: '', tag: '', content: '', image: null, imageURL: '', views: 0 },
+    initialState: {
+        id: 0,
+        title: '',
+        tag: '',
+        content: '',
+        image: null,
+        imageURL: '',
+        views: 0,
+        date: new Date(Date.now()),
+        editDate: new Date(Date.now()),
+    },
     reducers: {
         registerRoom: (state, room) => {
             console.log(room);
