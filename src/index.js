@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
 
+const customHistory = createBrowserHistory();
+
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter history={customHistory}>
             <App />
         </BrowserRouter>
     </Provider>,
