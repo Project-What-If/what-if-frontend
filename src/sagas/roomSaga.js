@@ -1,6 +1,7 @@
 import { call, put, getContext } from 'redux-saga/effects';
 import Axios from 'axios';
 import { roomActions } from '../slice/roomSlice';
+import history from '../utils/history';
 
 export function* registerRoomAsync(action) {
     const data = action.payload;
@@ -12,7 +13,9 @@ export function* registerRoomAsync(action) {
 
     console.log(response.data.id);
 
-    const history = yield getContext('history');
+    // yield history.push(`/room/${response.data.id}`);
 
-    yield history.push(`/room/${response.data.id}`);
+    history.push(`/room/${response.data.id}`, response.data.id);
+
+    // history.push(url, object) 일 경우 object는 state로 보내짐
 }

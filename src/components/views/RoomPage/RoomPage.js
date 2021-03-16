@@ -1,7 +1,8 @@
 import React from 'react';
 
 function RoomPage({ match, location }) {
-    return <div>RoomPage {match.params.roomID}</div>;
+    console.log(match.params.roomId);
+    return <div>RoomPage - id: {match.params.roomId}</div>;
 }
 
 export default RoomPage;

@@ -3,11 +3,10 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import rootReducer from './slice/rootSlice';
 import rootSaga from './sagas/rootSaga';
-import { createBrowserHistory } from 'history';
+import history from './utils/history';
 
-const customHistory = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware({
-    context: { history: customHistory },
+    context: { history: history },
 });
 const initialState = {};
 
