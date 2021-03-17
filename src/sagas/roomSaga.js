@@ -19,7 +19,10 @@ export function* getRoomAsync(action) {
 
     const response = yield Axios.get(`http://localhost:4000/room/${id}`);
 
-    console.log(response.data);
+    const request = yield Axios.put(`http://localhost:4000/room/${id}`, {
+        ...response.data,
+        views: parseInt(response.data.views, 10) + 1,
+    });
 
-    yield put(roomActions.getRoomAsync(response.data));
+    yield put(roomActions.getRoomAsync(request.data));
 } // getArticle 액션을 가로채서 payload로 보낸 id로 게시글을 조회
