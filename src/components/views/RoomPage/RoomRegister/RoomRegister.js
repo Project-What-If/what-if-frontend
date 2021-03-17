@@ -1,18 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
-function RoomRegister({ isforUpdate, idParam }) {
+function RoomRegister({ IsForUpdate, idParam }) {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (!idParam) {
-            return;
-        }
-        dispatch(roomActions.fetchRoom(idParam));
-        console.log(idParam);
-    }, [idParam]);
 
     const { id, title, tag, content, image, imageURL, views, date, editDate } = useSelector(state => ({
         id: state.roomReducers.id,
@@ -26,12 +18,25 @@ function RoomRegister({ isforUpdate, idParam }) {
         editDate: state.roomReducers.editDate,
     }));
 
+    const initialImage = { name: 'Select Image' };
     const [TitleValue, setTitleValue] = useState('');
     const [TagValue, setTagValue] = useState('');
     const [ContentValue, setContentValue] = useState('');
-    const [ImageValue, setImageValue] = useState(null);
+    const [ImageValue, setImageValue] = useState(initialImage);
     const [ImageURLValue, setImageURLValue] = useState('');
-    const [IsForUpdate, setIsForUpdate] = useState(isforUpdate);
+
+    useEffect(() => {
+        if (!IsForUpdate) {
+            setTitleValue('');
+            setTagValue('');
+            setContentValue('');
+            setImageValue(initialImage);
+            setImageURLValue('');
+            return;
+        }
+        dispatch(roomActions.fetchRoom(idParam));
+        console.log(idParam);
+    }, [IsForUpdate]);
 
     const onTitleChange = event => {
         setTitleValue(event.currentTarget.value);
@@ -42,6 +47,9 @@ function RoomRegister({ isforUpdate, idParam }) {
     };
 
     useEffect(() => {
+        if (!IsForUpdate) {
+            return;
+        }
         setTitleValue(title);
         setTagValue(tag);
         setContentValue(content);
@@ -52,12 +60,6 @@ function RoomRegister({ isforUpdate, idParam }) {
     const onContentChange = event => {
         setContentValue(event.currentTarget.value);
     };
-
-    useEffect(() => {
-        setTitleValue(title);
-        setTagValue(tag);
-        setContentValue(content);
-    }, [id]);
 
     const onImageChange = event => {
         event.preventDefault();
@@ -111,16 +113,15 @@ function RoomRegister({ isforUpdate, idParam }) {
         if (id) {
             room.id = id;
         }
-        dispatch(roomHandler(room));
 
-        // 초기화
         setTitleValue('');
         setTagValue('');
         setContentValue('');
         setImageValue(null);
         setImageURLValue('');
+
+        dispatch(roomHandler(room));
         return true;
-        // ImageRef.current.value = '';
     };
 
     return (

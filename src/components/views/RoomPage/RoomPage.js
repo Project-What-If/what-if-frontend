@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Typography } from 'antd';
+import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { roomActions } from '../../../slice/roomSlice';
 import RoomDetail from './Sections/RoomDetail';
 import RoomRegister from './RoomRegister/RoomRegister';
 
-function RoomPage({ match, location, ...other }) {
+function RoomPage({ match }) {
     const dispatch = useDispatch();
     const isEdit = match?.url?.startsWith('/edit') ?? false;
 
@@ -24,11 +24,8 @@ function RoomPage({ match, location, ...other }) {
     }));
     const date = useSelector(state => state.roomReducers.date);
     const views = useSelector(state => state.roomReducers.views);
-
-    const stateForProps = useSelector(state => state.roomReducers);
-
     const res = isEdit ? (
-        <RoomRegister isforUpdate={true} idParam={match.params.roomId} />
+        <RoomRegister IsForUpdate={true} idParam={match.params.roomId} />
     ) : (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <RoomDetail id={id} title={title} tag={tag} content={content} imageURL={imageURL} views={views} date={date} />
