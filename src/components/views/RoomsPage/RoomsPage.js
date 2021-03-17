@@ -23,6 +23,8 @@ function RoomsPage() {
         error: state.roomsReducers.error,
     }));
 
+    const room = <RoomRegister IsForUpdate={false} idParam={undefined} />;
+
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div>
@@ -32,7 +34,7 @@ function RoomsPage() {
                 <Button type="primary" onClick={() => onCheck(!check)}>
                     +
                 </Button>
-                {check && <RoomRegister />}
+                {check && room}
             </div>
             <div>
                 {error ? (

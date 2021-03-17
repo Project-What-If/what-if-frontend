@@ -8,9 +8,11 @@ function RoomDetail({ id, views, title, tag, imageURL, content }) {
     return (
         <div>
             <div style={{ margin: '2rem auto' }}>
-                <a href="/">
+                {/* <a href="/"> */}
+                <Link to="/">
                     <Button type="primary">목록으로 가기</Button>
-                </a>
+                </Link>
+                {/* </a> */}
             </div>
 
             <div style={{ textAlign: 'center' }}>

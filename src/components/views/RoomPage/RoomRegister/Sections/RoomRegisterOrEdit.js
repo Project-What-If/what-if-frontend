@@ -3,7 +3,7 @@ import { Button, Input } from 'antd';
 
 const { TextArea } = Input;
 
-function RoomRegisterOrEdit({ updateRequest, handleSubmit, handleTitleChange, handleTagChange, handleContentChange, handleImageChange, titleValue, tagValue, contentValue, imagePreview }) {
+function RoomRegisterOrEdit({ updateRequest, handleSubmit, handleTitleChange, handleTagChange, handleContentChange, handleImageChange, titleValue, tagValue, contentValue, imagePreview, imageValue }) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <form onSubmit={handleSubmit}>
@@ -16,7 +16,10 @@ function RoomRegisterOrEdit({ updateRequest, handleSubmit, handleTitleChange, ha
                     <div>
                         <TextArea onChange={handleContentChange} value={contentValue} name="content" />
                     </div>
-                    <Input onChange={handleImageChange} accept="image/jpg,image/png,image/jpeg,image/gif" type="file" name="image" />
+                    <Input onChange={handleImageChange} accept="image/jpg,image/png,image/jpeg,image/gif" type="file" name="image" id="image" style={{ display: 'none' }} />
+                    <Button>
+                        <label for="image">{imageValue?.name}</label>
+                    </Button>
                     {imagePreview}
                 </div>
                 <Button type="danger" onClick={handleSubmit}>

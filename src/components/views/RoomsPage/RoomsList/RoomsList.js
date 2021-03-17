@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Row } from 'antd';
 
-function RoomsList(props) {
-    console.log(props.rooms);
+function RoomsList({ rooms }) {
+    console.log(rooms);
     return (
         <div>
             <table>
@@ -13,7 +12,7 @@ function RoomsList(props) {
                 <tr>
                     <th>번호</th> <th>제목</th> <th>조회수</th>
                 </tr>
-                {props.rooms.map(room => (
+                {rooms.map(room => (
                     <tr>
                         <td>{room.id}</td>
                         <Link to={`/room/${room.id}`}>
