@@ -34,7 +34,7 @@ export function* putRoomAsync(action) {
     yield put(roomActions.putRoomAsync(response.data));
 
     history.push(`/room/${response.data.id}`, response.data.id);
-} // 게시물 수정 saga
+} // 방(룸) 수정 saga
 
 export function* fetchRoomAsync(action) {
     console.log(action);
@@ -45,3 +45,15 @@ export function* fetchRoomAsync(action) {
 
     yield put(roomActions.getRoomAsync(response.data));
 }
+
+export function* deleteRoomAsync(action) {
+    console.log(action);
+
+    const id = action.payload;
+
+    yield Axios.delete(`http://localhost:4000/room/${id}`);
+
+    console.log(`{id}번 삭제가 완료되었습니다.`);
+
+    history.push('/');
+} // 방(룸) 삭제 saga

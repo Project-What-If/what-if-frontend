@@ -24,28 +24,17 @@ function RoomPage({ match }) {
     }));
     const date = useSelector(state => state.roomReducers.date);
     const views = useSelector(state => state.roomReducers.views);
+
+    const onDeleteClick = () => {
+        if (!window.confirm('삭제하시겠습니까?')) return false;
+        dispatch(roomActions.deleteRoom(id));
+    };
+
     const res = isEdit ? (
         <RoomRegister IsForUpdate={true} idParam={match.params.roomId} />
     ) : (
         <div style={{ width: '80%', margin: '3rem auto' }}>
-            <RoomDetail id={id} title={title} tag={tag} content={content} imageURL={imageURL} views={views} date={date} />
-            <div style={{ margin: '2rem auto' }}>
-                <Link
-                    to={{
-                        pathname: `/edit/${id}`,
-                        search: '',
-                        state: {
-                            id: id,
-                            title: title,
-                            tag: tag,
-                            content: content,
-                            imageURL: imageURL,
-                        },
-                    }}
-                >
-                    <Button type="primary">수정</Button>
-                </Link>
-            </div>
+            <RoomDetail id={id} title={title} tag={tag} content={content} imageURL={imageURL} views={views} date={date} handleDeleteClick={onDeleteClick} />
         </div>
     );
 

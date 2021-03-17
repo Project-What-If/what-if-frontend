@@ -121,7 +121,6 @@ function RoomRegister({ IsForUpdate, idParam }) {
         setImageURLValue('');
 
         dispatch(roomHandler(room));
-        return true;
     };
 
     return (

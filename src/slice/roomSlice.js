@@ -61,6 +61,9 @@ export const roomSlice = createSlice({
         fetchRoom: (state, { payload: id }) => {
             console.log('방 조회 액션 호출 -- fetchRoom'); // saga에서 감시용
         },
+        deleteRoom: (state, { payload: id }) => {
+            console.log('방 삭제 액션 호출 -- deleteRoom'); // saga에서 감시용
+        },
     },
 });
 

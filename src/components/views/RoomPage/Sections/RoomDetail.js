@@ -4,7 +4,7 @@ import { Button, Typography } from 'antd';
 
 const { Title } = Typography;
 
-function RoomDetail({ id, views, title, tag, imageURL, content }) {
+function RoomDetail({ id, views, title, tag, imageURL, content, date, handleDeleteClick }) {
     return (
         <div>
             <div style={{ margin: '2rem auto' }}>
@@ -43,7 +43,32 @@ function RoomDetail({ id, views, title, tag, imageURL, content }) {
                     <tr>
                         <th>내용</th> <td colSpan="3">{content}</td>
                     </tr>
+                    <tr>
+                        <th>날짜</th> <td colSpan="3">{new Date(date).toLocaleString()}</td>
+                    </tr>
                 </table>
+            </div>
+            <div style={{ margin: '2rem auto' }}>
+                <Link
+                    to={{
+                        pathname: `/edit/${id}`,
+                        search: '',
+                        state: {
+                            id: id,
+                            title: title,
+                            tag: tag,
+                            content: content,
+                            imageURL: imageURL,
+                        },
+                    }}
+                >
+                    <Button type="primary">수정</Button>
+                </Link>
+            </div>
+            <div style={{ margin: 'auto' }}>
+                <Button onClick={handleDeleteClick} type="danger">
+                    삭제
+                </Button>
             </div>
         </div>
     );
