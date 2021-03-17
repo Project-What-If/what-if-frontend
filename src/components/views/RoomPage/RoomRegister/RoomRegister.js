@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
-function RoomRegister(props) {
-    console.log(props);
+function RoomRegister({ isforUpdate, id, title, tag, content, image, imageURL }) {
     const dispatch = useDispatch();
 
     const { views, date, editDate } = useSelector(state => ({
@@ -13,14 +12,14 @@ function RoomRegister(props) {
         editDate: '',
     }));
 
-    const [TitleValue, setTitleValue] = useState('');
-    const [TagValue, setTagValue] = useState('');
-    const [ContentValue, setContentValue] = useState('');
-    const [ImageValue, setImageValue] = useState(null);
-    const [ImageURLValue, setImageURLValue] = useState('');
+    const [TitleValue, setTitleValue] = useState(title ?? '');
+    const [TagValue, setTagValue] = useState(tag ?? '');
+    const [ContentValue, setContentValue] = useState(content ?? '');
+    const [ImageValue, setImageValue] = useState(image ?? null);
+    const [ImageURLValue, setImageURLValue] = useState(imageURL ?? '');
     // const ImageRef = useRef();
 
-    const [IsForUpdate, setIsForUpdate] = useState(false);
+    const [IsForUpdate, setIsForUpdate] = useState(isforUpdate ?? false);
 
     const onTitleChange = event => {
         setTitleValue(event.currentTarget.value);
@@ -41,17 +40,23 @@ function RoomRegister(props) {
         event.preventDefault();
         const reader = new FileReader();
         const file = event.target.files[0];
-        if (file) reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
         reader.onloadend = () => {
-            setImageValue(file);
+            const newFile = {};
+            for (const key in file) {
+                newFile[key] = file[key];
+            }
+            console.log(newFile);
+            setImageValue(newFile);
             setImageURLValue(reader.result);
         };
     };
 
-    let imagePreview = null;
-    if (ImageValue !== null) {
-        imagePreview = <img className="image_preview" src={ImageURLValue} width="250" height="250"></img>;
-    }
+    const imagePreview = ImageURLValue ? <img className="image_preview" src={ImageURLValue} width="250" height="250"></img> : null;
+
+    const handleRoom = IsForUpdate ? roomActions.putRoom : roomActions.registerRoom;
 
     const onSubmitRoom = event => {
         event.preventDefault();
@@ -82,7 +87,10 @@ function RoomRegister(props) {
             date,
             editDate,
         };
-        dispatch(roomActions.registerRoom(room));
+        if (id) {
+            room.id = id;
+        }
+        dispatch(handleRoom(room));
 
         // 초기화
         setTitleValue('');

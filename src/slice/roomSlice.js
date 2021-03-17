@@ -40,6 +40,24 @@ export const roomSlice = createSlice({
                 editDate: room.editDate,
             }; // 실질적으로 내용을 뿌려주는 부분
         },
+        putRoom: (state, { payload: room }) => {
+            console.log(room);
+        },
+        putRoomAsync: (state, { payload: room }) => {
+            console.log(room);
+            return {
+                ...state,
+                id: room.id,
+                title: room.title,
+                tag: room.tag,
+                content: room.content,
+                image: room.image,
+                imageURL: room.imageURL,
+                views: room.views,
+                date: room.date,
+                editDate: room.editDate,
+            }; // 실질적으로 내용을 뿌려주는 부분
+        },
     },
 });
 
