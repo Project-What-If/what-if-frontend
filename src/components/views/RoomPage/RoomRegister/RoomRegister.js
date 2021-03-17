@@ -1,15 +1,29 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
-function RoomRegister() {
+function RoomRegister({ isforUpdate, idParam }) {
     const dispatch = useDispatch();
 
-    const { views, date, editDate } = useSelector(state => ({
+    useEffect(() => {
+        if (!idParam) {
+            return;
+        }
+        dispatch(roomActions.fetchRoom(idParam));
+        console.log(idParam);
+    }, [idParam]);
+
+    const { id, title, tag, content, image, imageURL, views, date, editDate } = useSelector(state => ({
+        id: state.roomReducers.id,
+        title: state.roomReducers.title,
+        tag: state.roomReducers.tag,
+        content: state.roomReducers.content,
+        image: state.roomReducers.image,
+        imageURL: state.roomReducers.imageURL,
         views: state.roomReducers.views,
         date: state.roomReducers.date,
-        editDate: '',
+        editDate: state.roomReducers.editDate,
     }));
 
     const [TitleValue, setTitleValue] = useState('');
@@ -17,58 +31,71 @@ function RoomRegister() {
     const [ContentValue, setContentValue] = useState('');
     const [ImageValue, setImageValue] = useState(null);
     const [ImageURLValue, setImageURLValue] = useState('');
-    // const ImageRef = useRef();
-
-    const [IsForUpdate, setIsForUpdate] = useState(false);
+    const [IsForUpdate, setIsForUpdate] = useState(isforUpdate);
 
     const onTitleChange = event => {
         setTitleValue(event.currentTarget.value);
     };
-    // console.log(TitleValue);
 
     const onTagChange = event => {
         setTagValue(event.currentTarget.value);
     };
-    // console.log(TagValue);
+
+    useEffect(() => {
+        setTitleValue(title);
+        setTagValue(tag);
+        setContentValue(content);
+        setImageValue(image);
+        setImageURLValue(imageURL);
+    }, [title, tag, content, image, imageURL]);
 
     const onContentChange = event => {
         setContentValue(event.currentTarget.value);
     };
-    // console.log(ContentValue);
+
+    useEffect(() => {
+        setTitleValue(title);
+        setTagValue(tag);
+        setContentValue(content);
+    }, [id]);
 
     const onImageChange = event => {
         event.preventDefault();
         const reader = new FileReader();
         const file = event.target.files[0];
-        if (file) reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
         reader.onloadend = () => {
-            setImageValue(file);
+            const newFile = {};
+            for (const key in file) {
+                newFile[key] = file[key];
+            }
+            console.log(newFile);
+            setImageValue(newFile);
             setImageURLValue(reader.result);
         };
     };
 
-    let imagePreview = null;
-    if (ImageValue !== null) {
-        imagePreview = <img className="image_preview" src={ImageURLValue} width="250" height="250"></img>;
-    }
+    const imagePreview = ImageURLValue ? (
+        <div>
+            <img className="image_preview" src={ImageURLValue} height="100%" width="250px"></img>
+        </div>
+    ) : null;
 
+    const roomHandler = IsForUpdate ? roomActions.putRoom : roomActions.registerRoom;
+
+    const queries = ['제목', '태그', '내용', '이미지'];
+    const checks = [TitleValue, TagValue, ContentValue, ImageValue];
     const onSubmitRoom = event => {
         event.preventDefault();
-        if (TitleValue === '' || TitleValue === null || TitleValue === undefined) {
-            alert('제목을 작성하십시오.');
-            return false;
-        }
-        if (TagValue === '' || TagValue === null || TagValue === undefined) {
-            alert('태그를 작성하십시오.');
-            return false;
-        }
-        if (ContentValue === '' || ContentValue === null || ContentValue === undefined) {
-            alert('내용을 작성하십시오.');
-            return false;
-        }
-        if (ImageValue === '' || ImageValue === null || ImageValue === undefined) {
-            alert('이미지를 넣으십시오.');
-            return false;
+        for (let i = 0; i < queries.length; i++) {
+            const query = queries[i];
+            const check = checks[i];
+            if (!check) {
+                alert(`${query}를 입력하세요.`);
+                return false;
+            }
         }
 
         const room = {
@@ -79,9 +106,12 @@ function RoomRegister() {
             imageURL: ImageURLValue,
             views,
             date,
-            editDate,
+            editDate: new Date(Date.now()),
         };
-        dispatch(roomActions.registerRoom(room));
+        if (id) {
+            room.id = id;
+        }
+        dispatch(roomHandler(room));
 
         // 초기화
         setTitleValue('');

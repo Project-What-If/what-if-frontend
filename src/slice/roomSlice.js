@@ -11,7 +11,7 @@ export const roomSlice = createSlice({
         imageURL: '',
         views: 0,
         date: new Date(Date.now()),
-        editDate: new Date(Date.now()),
+        editDate: '',
     },
     reducers: {
         registerRoom: (state, { payload: room }) => {
@@ -39,6 +39,27 @@ export const roomSlice = createSlice({
                 date: room.date,
                 editDate: room.editDate,
             }; // 실질적으로 내용을 뿌려주는 부분
+        },
+        putRoom: (state, { payload: room }) => {
+            console.log('방 수정 액션 호출 -- putRoom'); // saga에서 감시용
+        },
+        putRoomAsync: (state, { payload: room }) => {
+            console.log(room);
+            return {
+                ...state,
+                id: room.id,
+                title: room.title,
+                tag: room.tag,
+                content: room.content,
+                image: room.image,
+                imageURL: room.imageURL,
+                views: room.views,
+                date: room.date,
+                editDate: room.editDate,
+            }; // 실질적으로 내용을 뿌려주는 부분
+        },
+        fetchRoom: (state, { payload: id }) => {
+            console.log('방 조회 액션 호출 -- fetchRoom'); // saga에서 감시용
         },
     },
 });

@@ -26,3 +26,22 @@ export function* getRoomAsync(action) {
 
     yield put(roomActions.getRoomAsync(request.data));
 } // getArticle 액션을 가로채서 payload로 보낸 id로 게시글을 조회
+
+export function* putRoomAsync(action) {
+    const room = action.payload;
+    console.log('putRoomAsync', action.payload);
+    const response = yield Axios.put(`http://localhost:4000/room/${room.id}`, room);
+    yield put(roomActions.putRoomAsync(response.data));
+
+    history.push(`/room/${response.data.id}`, response.data.id);
+} // 게시물 수정 saga
+
+export function* fetchRoomAsync(action) {
+    console.log(action);
+
+    const id = action.payload;
+
+    const response = yield Axios.get(`http://localhost:4000/room/${id}`);
+
+    yield put(roomActions.getRoomAsync(response.data));
+}
