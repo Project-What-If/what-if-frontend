@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/what-if-frontend/static/css/main.fb0d8c77.chunk.css",
+    "main.js": "/what-if-frontend/static/js/main.6fdaac27.chunk.js",
+    "main.js.map": "/what-if-frontend/static/js/main.6fdaac27.chunk.js.map",
+    "runtime-main.js": "/what-if-frontend/static/js/runtime-main.4fca39e0.js",
+    "runtime-main.js.map": "/what-if-frontend/static/js/runtime-main.4fca39e0.js.map",
+    "static/css/2.98e7ac70.chunk.css": "/what-if-frontend/static/css/2.98e7ac70.chunk.css",
+    "static/js/2.e42b2df8.chunk.js": "/what-if-frontend/static/js/2.e42b2df8.chunk.js",
+    "static/js/2.e42b2df8.chunk.js.map": "/what-if-frontend/static/js/2.e42b2df8.chunk.js.map",
+    "static/js/3.c84ce0dc.chunk.js": "/what-if-frontend/static/js/3.c84ce0dc.chunk.js",
+    "static/js/3.c84ce0dc.chunk.js.map": "/what-if-frontend/static/js/3.c84ce0dc.chunk.js.map",
+    "index.html": "/what-if-frontend/index.html",
+    "static/css/2.98e7ac70.chunk.css.map": "/what-if-frontend/static/css/2.98e7ac70.chunk.css.map",
+    "static/css/main.fb0d8c77.chunk.css.map": "/what-if-frontend/static/css/main.fb0d8c77.chunk.css.map",
+    "static/js/2.e42b2df8.chunk.js.LICENSE.txt": "/what-if-frontend/static/js/2.e42b2df8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4fca39e0.js",
+    "static/css/2.98e7ac70.chunk.css",
+    "static/js/2.e42b2df8.chunk.js",
+    "static/css/main.fb0d8c77.chunk.css",
+    "static/js/main.6fdaac27.chunk.js"
+  ]
+}
