@@ -4,7 +4,6 @@ import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
 function RoomRegister({ isforUpdate, title, tag, content, image, imageURL }) {
-    console.log(props);
     const dispatch = useDispatch();
 
     const { views, date, editDate } = useSelector(state => ({
@@ -41,17 +40,21 @@ function RoomRegister({ isforUpdate, title, tag, content, image, imageURL }) {
         event.preventDefault();
         const reader = new FileReader();
         const file = event.target.files[0];
-        if (file) reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
         reader.onloadend = () => {
-            setImageValue(file);
+            const newFile = {};
+            for (const key in file) {
+                newFile[key] = file[key];
+            }
+            console.log(newFile);
+            setImageValue(newFile);
             setImageURLValue(reader.result);
         };
     };
 
-    let imagePreview = null;
-    if (ImageValue !== null) {
-        imagePreview = <img className="image_preview" src={ImageURLValue} width="250" height="250"></img>;
-    }
+    const imagePreview = ImageURLValue ? <img className="image_preview" src={ImageURLValue} width="250" height="250"></img> : null;
 
     const onSubmitRoom = event => {
         event.preventDefault();
