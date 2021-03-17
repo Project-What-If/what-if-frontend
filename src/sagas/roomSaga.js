@@ -35,3 +35,13 @@ export function* putRoomAsync(action) {
 
     history.push(`/room/${response.data.id}`, response.data.id);
 } // 게시물 수정 saga
+
+export function* fetchRoomAsync(action) {
+    console.log(action);
+
+    const id = action.payload;
+
+    const response = yield Axios.get(`http://localhost:4000/room/${id}`);
+
+    yield put(roomActions.getRoomAsync(response.data));
+}

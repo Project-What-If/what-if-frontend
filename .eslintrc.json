@@ -20,7 +20,8 @@
         "no-restricted-syntax": "off",
         "no-prototype-builtins": "off",
         "no-continue": "off",
-        "guard-for-in": "off"
+        "guard-for-in": "off",
+        "no-plusplus": "off"
     },
     "settings": {
         "import/resolver": {

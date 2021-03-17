@@ -14,10 +14,6 @@ function RoomPage({ match, location, ...other }) {
         dispatch(roomActions.getRoom(match.params.roomId));
     }, [match.params.roomId]);
 
-    useEffect(() => {
-        console.log(`isEdit is ${isEdit}`);
-    }, [isEdit]);
-
     const { id, title, tag, content, image, imageURL } = useSelector(state => ({
         id: state.roomReducers.id,
         title: state.roomReducers.title,
@@ -32,7 +28,7 @@ function RoomPage({ match, location, ...other }) {
     const stateForProps = useSelector(state => state.roomReducers);
 
     const res = isEdit ? (
-        <RoomRegister isforUpdate={true} id={id} title={title} tag={tag} content={content} image={image} imageURL={imageURL} />
+        <RoomRegister isforUpdate={true} idParam={match.params.roomId} />
     ) : (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <RoomDetail id={id} title={title} tag={tag} content={content} imageURL={imageURL} views={views} date={date} />

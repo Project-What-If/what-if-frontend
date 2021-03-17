@@ -25,19 +25,21 @@ function RoomDetail({ id, views, title, tag, imageURL, content }) {
                         <th>번호</th> <td>{id}</td> <th>조회수</th> <td>{views}</td>
                     </tr>
                     <tr>
-                        <th>제목</th> <td colspan="3">{title}</td>
+                        <th>제목</th> <td colSpan="3">{title}</td>
                     </tr>
                     <tr>
-                        <th>태그</th> <td colspan="3">{tag}</td>
+                        <th>태그</th> <td colSpan="3">{tag}</td>
                     </tr>
                     <tr>
                         <th>이미지URL</th>
-                        <td colspan="3">
-                            <img className="image" src={imageURL} width="250" height="250"></img>
+                        <td colSpan="3">
+                            <div>
+                                <img className="image" src={imageURL} height="100%" width="250px" />
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <th>내용</th> <td colspan="3">{content}</td>
+                        <th>내용</th> <td colSpan="3">{content}</td>
                     </tr>
                 </table>
             </div>
