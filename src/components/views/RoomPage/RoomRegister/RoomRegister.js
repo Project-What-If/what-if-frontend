@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
-function RoomRegister(props) {
+function RoomRegister({ isforUpdate, title, tag, content, image, imageURL }) {
     console.log(props);
     const dispatch = useDispatch();
 
@@ -13,14 +13,14 @@ function RoomRegister(props) {
         editDate: '',
     }));
 
-    const [TitleValue, setTitleValue] = useState('');
-    const [TagValue, setTagValue] = useState('');
-    const [ContentValue, setContentValue] = useState('');
-    const [ImageValue, setImageValue] = useState(null);
-    const [ImageURLValue, setImageURLValue] = useState('');
+    const [TitleValue, setTitleValue] = useState(title ?? '');
+    const [TagValue, setTagValue] = useState(tag ?? '');
+    const [ContentValue, setContentValue] = useState(content ?? '');
+    const [ImageValue, setImageValue] = useState(image ?? null);
+    const [ImageURLValue, setImageURLValue] = useState(imageURL ?? '');
     // const ImageRef = useRef();
 
-    const [IsForUpdate, setIsForUpdate] = useState(false);
+    const [IsForUpdate, setIsForUpdate] = useState(isforUpdate ?? false);
 
     const onTitleChange = event => {
         setTitleValue(event.currentTarget.value);
