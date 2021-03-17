@@ -14,7 +14,7 @@ function RoomDetail(props) {
             </div>
 
             <div style={{ textAlign: 'center' }}>
-                <Title>방</Title>
+                <Title>{id}번째 방</Title>
             </div>
             <div>
                 <table>
