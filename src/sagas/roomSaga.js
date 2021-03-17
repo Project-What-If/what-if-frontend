@@ -24,5 +24,5 @@ export function* getRoomAsync(action) {
         views: parseInt(response.data.views, 10) + 1,
     });
 
-    yield put(roomActions.getRoomAsync(response.data));
+    yield put(roomActions.getRoomAsync(request.data));
 } // getArticle 액션을 가로채서 payload로 보낸 id로 게시글을 조회
