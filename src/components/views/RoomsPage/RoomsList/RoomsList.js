@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Col, Row } from 'antd';
 
 function RoomsList(props) {
     console.log(props.rooms);

@@ -4,11 +4,6 @@ import { Button, Input } from 'antd';
 const { TextArea } = Input;
 
 function RoomRegisterOrEdit(props) {
-    // let profilePreview = null;
-    // if (props.imageValue !== null) {
-    //     profilePreview = <img className="image_preview" src={props.imageURLValue} width="250" height="250"></img>;
-    // }
-
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <form onSubmit={props.handleSubmit}>
