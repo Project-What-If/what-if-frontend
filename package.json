@@ -1,4 +1,5 @@
 {
+    "homepage": "https://project-what-if.github.io/what-if-frontend/",
     "name": "what-if-frontend",
     "version": "0.1.0",
     "private": true,
@@ -9,6 +10,7 @@
         "@testing-library/user-event": "^12.1.10",
         "antd": "^4.13.1",
         "axios": "^0.21.1",
+        "gh-pages": "^3.1.0",
         "history": "4.10.1",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
@@ -25,7 +27,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "predeploy": "react-scripts build",
+        "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
         "extends": [
