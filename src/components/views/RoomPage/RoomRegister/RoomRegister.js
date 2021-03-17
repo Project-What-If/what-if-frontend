@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
-function RoomRegister() {
+function RoomRegister(props) {
+    console.log(props);
     const dispatch = useDispatch();
 
     const { views, date, editDate } = useSelector(state => ({

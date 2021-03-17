@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 function RoomDetail(props) {
     return (
-        <div style={{ width: '80%', margin: '3rem auto' }}>
+        <div>
             <div style={{ margin: '2rem auto' }}>
                 <a href="/">
                     <Button type="primary">목록으로 가기</Button>
