@@ -6,16 +6,20 @@ import history from '../utils/history';
 export function* registerRoomAsync(action) {
     const data = action.payload;
 
-    // const postedData = yield Axios.post(`http://localhost:4000/room`, data);
     const response = yield Axios.post(`http://localhost:4000/room`, data);
 
     yield alert('저장되었습니다.');
 
     console.log(response.data.id);
 
-    // yield history.push(`/room/${response.data.id}`);
-
     history.push(`/room/${response.data.id}`, response.data.id);
-
-    // history.push(url, object) 일 경우 object는 state로 보내짐
 }
+export function* getRoomAsync(action) {
+    const id = action.payload;
+
+    const response = yield Axios.get(`http://localhost:4000/room/${id}`);
+
+    console.log(response.data);
+
+    yield put(roomActions.getRoomAsync(response.data));
+} // getArticle 액션을 가로채서 payload로 보낸 id로 게시글을 조회
