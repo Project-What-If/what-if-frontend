@@ -32,7 +32,7 @@ function RoomPage({ match, location, ...other }) {
     const stateForProps = useSelector(state => state.roomReducers);
 
     const res = isEdit ? (
-        <RoomRegister isforUpdate={true} title={title} tag={tag} content={content} image={image} imageURL={imageURL} />
+        <RoomRegister isforUpdate={true} id={id} title={title} tag={tag} content={content} image={image} imageURL={imageURL} />
     ) : (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <RoomDetail id={id} title={title} tag={tag} content={content} imageURL={imageURL} views={views} date={date} />

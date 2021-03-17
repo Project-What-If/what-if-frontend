@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomActions } from '../../../../slice/roomSlice';
 import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 
-function RoomRegister({ isforUpdate, title, tag, content, image, imageURL }) {
+function RoomRegister({ isforUpdate, id, title, tag, content, image, imageURL }) {
     const dispatch = useDispatch();
 
     const { views, date, editDate } = useSelector(state => ({
@@ -56,6 +56,8 @@ function RoomRegister({ isforUpdate, title, tag, content, image, imageURL }) {
 
     const imagePreview = ImageURLValue ? <img className="image_preview" src={ImageURLValue} width="250" height="250"></img> : null;
 
+    const handleRoom = IsForUpdate ? roomActions.putRoom : roomActions.registerRoom;
+
     const onSubmitRoom = event => {
         event.preventDefault();
         if (TitleValue === '' || TitleValue === null || TitleValue === undefined) {
@@ -85,7 +87,10 @@ function RoomRegister({ isforUpdate, title, tag, content, image, imageURL }) {
             date,
             editDate,
         };
-        dispatch(roomActions.registerRoom(room));
+        if (id) {
+            room.id = id;
+        }
+        dispatch(handleRoom(room));
 
         // 초기화
         setTitleValue('');
