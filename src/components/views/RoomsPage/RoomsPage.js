@@ -16,7 +16,12 @@ function RoomsPage() {
         dispatch(roomsActions.getRooms());
     }, [dispatch]);
 
-    const rooms = useSelector(state => state.roomsReducers.rooms);
+    const { rooms, isLoading, isSuccess, error } = useSelector(state => ({
+        rooms: state.roomsReducers.rooms,
+        isLoading: state.roomsReducers.isLoading,
+        isSuccess: state.roomsReducers.isSuccess,
+        error: state.roomsReducers.error,
+    }));
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -30,7 +35,15 @@ function RoomsPage() {
                 {check && <RoomRegister />}
             </div>
             <div>
-                <RoomsList rooms={rooms} />
+                {error ? (
+                    <h2>에러 발생: {error}</h2>
+                ) : isSuccess && rooms.length > 0 ? (
+                    <RoomsList rooms={rooms} />
+                ) : isSuccess && rooms.length <= 0 ? (
+                    <p> 조회할 내용이 없습니다. </p>
+                ) : (
+                    <p> 목록을 불러오는 중입니다. </p>
+                )}
             </div>
         </div>
     );

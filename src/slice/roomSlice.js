@@ -26,6 +26,7 @@ export const roomSlice = createSlice({
             console.log(id); // saga 감시용
         },
         getRoomAsync: (state, { payload: room }) => {
+            console.log('saga에서 put 액션 호출 -- getRoomAsync');
             return {
                 ...state,
                 id: room.id,

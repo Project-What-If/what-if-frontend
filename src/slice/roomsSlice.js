@@ -11,14 +11,23 @@ export const roomsSlice = createSlice({
 
     reducers: {
         getRooms: (state, { payload }) => {
-            console.log('getRooms 액션 호출');
+            console.log('방 목록 조회 액션 호출 - getRooms');
         },
         getRoomsAsync: (state, { payload: data }) => {
+            console.log('saga에서 put 액션 호출 - getRoomsAsyncs');
             return {
                 ...state,
                 rooms: data,
                 isSuccess: true,
                 isLoading: false,
+            };
+        },
+        getRoomsFailedAsync: (state, { payload: error }) => {
+            console.log('saga에서 put 액션 호출 - getRoomsFailedAsync');
+            return {
+                ...state,
+                isLoading: false,
+                error: error,
             };
         },
     },
