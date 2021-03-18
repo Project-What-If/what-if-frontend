@@ -2,10 +2,10 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
 import { roomActions } from '../slice/roomSlice';
 import { roomsActions } from '../slice/roomsSlice';
-import { registerRoomAsync, getRoomAsync, putRoomAsync, fetchRoomAsync } from './roomSaga';
+import { registerRoomAsync, getRoomAsync, putRoomAsync, fetchRoomAsync, deleteRoomAsync } from './roomSaga';
 import { getRoomsAsync } from './roomsSaga';
 
-const { registerRoom, getRoom, putRoom, fetchRoom } = roomActions;
+const { registerRoom, getRoom, putRoom, fetchRoom, deleteRoom } = roomActions;
 const { getRooms } = roomsActions;
 
 export default function* rootWatcher() {
@@ -14,4 +14,5 @@ export default function* rootWatcher() {
     yield takeEvery(getRoom.type, getRoomAsync);
     yield takeEvery(getRooms.type, getRoomsAsync);
     yield takeEvery(fetchRoom.type, fetchRoomAsync);
+    yield takeLatest(deleteRoom.type, deleteRoomAsync);
 }

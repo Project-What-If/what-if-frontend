@@ -21,7 +21,8 @@
         "no-prototype-builtins": "off",
         "no-continue": "off",
         "guard-for-in": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "consistent-return": "off"
     },
     "settings": {
         "import/resolver": {
