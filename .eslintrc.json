@@ -22,7 +22,8 @@
         "no-continue": "off",
         "guard-for-in": "off",
         "no-plusplus": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "prefer-template": "off"
     },
     "settings": {
         "import/resolver": {
