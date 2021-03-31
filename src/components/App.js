@@ -8,9 +8,9 @@ function App() {
     return (
         <div>
             <Switch>
-                <Route exact path={process.env.PUBLIC_URL + '/'} component={RoomsPage} />
-                <Route exact path={process.env.PUBLIC_URL + '/room/:roomId'} component={RoomPage} />
-                <Route exact path={process.env.PUBLIC_URL + '/edit/:roomId'} component={RoomPage} />
+                <Route exact path="/" component={RoomsPage} />
+                <Route exact path="/room/:roomId" component={RoomPage} />
+                <Route exact path="/edit/:roomId" component={RoomPage} />
             </Switch>
         </div>
     );

@@ -60,6 +60,5 @@
         "eslint-plugin-react": "^7.21.5",
         "eslint-plugin-react-hooks": "^1.7.0",
         "prettier": "2.2.1"
-    },
-    "homepage": "https://project-what-if.github.io/what-if-frontend/"
+    }
 }
