@@ -1,12 +1,21 @@
 // saga도 기능별로 만들 수 있으므로 rootSaga 하나 둠
-import { takeEvery, takeLatest } from 'redux-saga/effects';
+import { take, takeEvery, takeLatest } from 'redux-saga/effects';
 import { roomActions } from '../slice/roomSlice';
 import { roomsActions } from '../slice/roomsSlice';
-import { registerRoomAsync, getRoomAsync, putRoomAsync, fetchRoomAsync, deleteRoomAsync } from './roomSaga';
+import {
+    registerRoomAsync,
+    getRoomAsync,
+    putRoomAsync,
+    fetchRoomAsync,
+    deleteRoomAsync,
+} from './roomSaga';
 import { getRoomsAsync } from './roomsSaga';
+import { commentActions } from '../slice/commentSlice';
+import { registerCommentAsync } from './commentSaga';
 
 const { registerRoom, getRoom, putRoom, fetchRoom, deleteRoom } = roomActions;
 const { getRooms } = roomsActions;
+const { registerComment } = commentActions;
 
 export default function* rootWatcher() {
     yield takeLatest(registerRoom.type, registerRoomAsync);
@@ -15,4 +24,5 @@ export default function* rootWatcher() {
     yield takeEvery(getRooms.type, getRoomsAsync);
     yield takeEvery(fetchRoom.type, fetchRoomAsync);
     yield takeLatest(deleteRoom.type, deleteRoomAsync);
+    yield takeLatest(registerComment.type, registerCommentAsync);
 }

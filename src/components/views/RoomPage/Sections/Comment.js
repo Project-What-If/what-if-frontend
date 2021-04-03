@@ -5,7 +5,7 @@ function Comment({ comment, handleCommentChange, handleCommentSubmit }) {
 
     return (
         <>
-            <form>
+            <form onSubmit={handleCommentSubmit}>
                 <div style={{ border: '1px solid black' }}>
                     <textarea
                         style={{
