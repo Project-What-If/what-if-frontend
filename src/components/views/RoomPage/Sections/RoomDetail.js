@@ -14,6 +14,7 @@ function RoomDetail({
     date,
     handleDeleteClick,
     handleComment,
+    loadComments,
 }) {
     return (
         <div>
@@ -65,6 +66,29 @@ function RoomDetail({
                     </tr>
                 </table>
             </div>
+
+            <div>
+                <span>댓글</span>
+                {loadComments.map(comment => (
+                    <div
+                        style={{
+                            width: '100%',
+                            backgroundColor: 'lightsteelblue',
+                            border: '1px dotted black',
+                        }}
+                    >
+                        <span key={comment.id}>
+                            <span>{comment.content}</span>
+                            <span style={{ float: 'right' }}>
+                                {new Date(comment.date).toLocaleString()}
+                            </span>
+                        </span>
+                    </div>
+                ))}
+            </div>
+
+            <div style={{ margin: '2rem auto' }}>{handleComment}</div>
+
             <div style={{ margin: '2rem auto' }}>
                 <Link
                     to={{
@@ -87,7 +111,6 @@ function RoomDetail({
                     삭제
                 </Button>
             </div>
-            <div style={{ margin: '2rem auto' }}>{handleComment}</div>
         </div>
     );
 }

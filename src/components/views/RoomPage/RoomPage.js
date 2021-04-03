@@ -28,6 +28,8 @@ function RoomPage({ match, location }) {
     );
     const views = useSelector(state => state.roomReducers.views);
 
+    const comments = useSelector(state => state.commentReducers.comments);
+
     const onCommentChange = e => {
         setCommentValue(e.currentTarget.value);
     };
@@ -49,6 +51,7 @@ function RoomPage({ match, location }) {
 
     useEffect(() => {
         dispatch(roomActions.getRoom(match.params.roomId));
+        dispatch(commentActions.getComments(match.params.roomId));
     }, [match.params.roomId]);
 
     const onDeleteClick = () => {
@@ -76,6 +79,7 @@ function RoomPage({ match, location }) {
                         handleCommentSubmit={onCommentSubmit}
                     />
                 }
+                loadComments={comments}
             />
         </div>
     );

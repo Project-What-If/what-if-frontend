@@ -11,11 +11,11 @@ import {
 } from './roomSaga';
 import { getRoomsAsync } from './roomsSaga';
 import { commentActions } from '../slice/commentSlice';
-import { registerCommentAsync } from './commentSaga';
+import { registerCommentAsync, getCommentsAsync } from './commentSaga';
 
 const { registerRoom, getRoom, putRoom, fetchRoom, deleteRoom } = roomActions;
 const { getRooms } = roomsActions;
-const { registerComment } = commentActions;
+const { registerComment, getComments } = commentActions;
 
 export default function* rootWatcher() {
     yield takeLatest(registerRoom.type, registerRoomAsync);
@@ -25,4 +25,5 @@ export default function* rootWatcher() {
     yield takeEvery(fetchRoom.type, fetchRoomAsync);
     yield takeLatest(deleteRoom.type, deleteRoomAsync);
     yield takeLatest(registerComment.type, registerCommentAsync);
+    yield takeEvery(getComments.type, getCommentsAsync);
 }

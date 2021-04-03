@@ -13,6 +13,9 @@ export const commentSlice = createSlice({
         registerComment: (state, { payload: comment }) => {
             console.log('댓글 등록 액션 호출 -- registerComment'); // saga 감시용
         },
+        getComments: (state, { payload: roomId }) => {
+            console.log('댓글 불러오기 액션 호출 -- getComment'); // saga 감시용
+        },
         getCommentsAsync: (state, { payload: list }) => {
             return { ...state, comments: list };
         },
