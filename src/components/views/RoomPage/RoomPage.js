@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { roomActions } from '../../../slice/roomSlice';
 import RoomDetail from './Sections/RoomDetail';
 import RoomRegister from './RoomRegister/RoomRegister';
+import Comment from './Sections/Comment';
 
 function RoomPage({ match }) {
     const dispatch = useDispatch();
     const isEdit = match?.url?.startsWith('/edit') ?? false;
+
+    const [CommentValue, setCommentValue] = useState('');
+
+    const onCommentChange = e => {
+        setCommentValue(e.currentTarget.value);
+    };
+
+    const onCommentSubmit = () => {}; // reducer 만든 후 추가
 
     useEffect(() => {
         dispatch(roomActions.getRoom(match.params.roomId));
@@ -34,7 +43,23 @@ function RoomPage({ match }) {
         <RoomRegister IsForUpdate={true} idParam={match.params.roomId} />
     ) : (
         <div style={{ width: '80%', margin: '3rem auto' }}>
-            <RoomDetail id={id} title={title} tag={tag} content={content} imageURL={imageURL} views={views} date={date} handleDeleteClick={onDeleteClick} />
+            <RoomDetail
+                id={id}
+                title={title}
+                tag={tag}
+                content={content}
+                imageURL={imageURL}
+                views={views}
+                date={date}
+                handleDeleteClick={onDeleteClick}
+                handleComment={
+                    <Comment
+                        comment={CommentValue}
+                        handleCommentChange={onCommentChange}
+                        handleCommentSubmit={onCommentChange}
+                    />
+                }
+            />
         </div>
     );
 
