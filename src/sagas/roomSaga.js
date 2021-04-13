@@ -30,7 +30,10 @@ export function* getRoomAsync(action) {
 export function* putRoomAsync(action) {
     const room = action.payload;
     console.log('putRoomAsync', action.payload);
-    const response = yield Axios.put(`http://localhost:4000/room/${room.id}`, room);
+    const response = yield Axios.put(
+        `http://localhost:4000/room/${room.id}`,
+        room,
+    );
     yield put(roomActions.putRoomAsync(response.data));
 
     history.push(`/room/${response.data.id}`, response.data.id);
