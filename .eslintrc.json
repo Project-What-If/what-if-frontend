@@ -4,7 +4,11 @@
         "node": true,
         "es2020": true
     },
-    "extends": ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base",
+        "plugin:prettier/recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": 11,
         "sourceType": "module"
@@ -27,8 +31,15 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "paths": ["src"],
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+                "paths": [
+                    "src"
+                ],
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
             }
         }
     }

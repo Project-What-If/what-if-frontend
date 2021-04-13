@@ -6,7 +6,17 @@ import RoomRegisterOrEdit from './Sections/RoomRegisterOrEdit';
 function RoomRegister({ IsForUpdate, idParam }) {
     const dispatch = useDispatch();
 
-    const { id, title, tag, content, image, imageURL, views, date, editDate } = useSelector(state => ({
+    const {
+        id,
+        title,
+        tag,
+        content,
+        image,
+        imageURL,
+        views,
+        date,
+        editDate,
+    } = useSelector(state => ({
         id: state.roomReducers.id,
         title: state.roomReducers.title,
         tag: state.roomReducers.tag,
@@ -81,11 +91,18 @@ function RoomRegister({ IsForUpdate, idParam }) {
 
     const imagePreview = ImageURLValue ? (
         <div>
-            <img className="image_preview" src={ImageURLValue} height="100%" width="250px"></img>
+            <img
+                className="image_preview"
+                src={ImageURLValue}
+                height="100%"
+                width="250px"
+            ></img>
         </div>
     ) : null;
 
-    const roomHandler = IsForUpdate ? roomActions.putRoom : roomActions.registerRoom;
+    const roomHandler = IsForUpdate
+        ? roomActions.putRoom
+        : roomActions.registerRoom;
 
     const queries = ['제목', '태그', '내용', '이미지'];
     const checks = [TitleValue, TagValue, ContentValue, ImageValue];
